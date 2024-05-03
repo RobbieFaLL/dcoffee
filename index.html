@@ -4,28 +4,137 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" type="text/css" href="main.css">
-    <script src="main.js">
-        
-    </script>
     <title>Dcoffee menu</title>
 </head>
 <body>
-    <p>hello</p>
-
-    <div class="dropdown">
-        <div class="select">
-            <span class="selected">Figma</span>
-            <div class="caret"></div>
-
-
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="main.css">
+        <script src="main.js"></script>
+        <title>Coffee Menu</title>
+    </head>
+    <body>
+        <div class="dropdown coffee-dropdown">
+            <div class="select">
+                <span class="selected">Select Coffee Type</span>
+                <div class="caret"></div>
+            </div>
+            <ul class="menu">
+                <li>Espresso</li>
+                <li>Americano</li>
+                <li>Latte</li>
+                <li>Cappuccino</li>
+                <li>Flat White</li>
+                <li>Macchiato</li>
+                <li>Mocha</li>
+                <li>Hot Chocolate</li>
+            </ul>
         </div>
-        <ul class="menu">
-            <li>framer</li>
-            <li>sketch</li>
-            <li>invasion</li>
-            <li class="active">Figma</li>
-            <li>adobe</li>
-        </ul>
-    </div>
+    
+        <div class="dropdown milk-dropdown">
+            <div class="select">
+                <span class="selected">Select Milk Type</span>
+                <div class="caret"></div>
+            </div>
+            <ul class="menu">
+                <li>Cow's Milk</li>
+                <li>Skimmed Milk</li>
+                <li>Semi-Skimmed Milk</li>
+                <li>Oat Milk</li>
+                <li>Cashew Milk</li>
+                <li>Almond Milk</li>
+                <li>Soya Milk</li>
+                <li>Goat Milk</li>
+                <li>Yak Milk</li>
+                <li>Nettle Milk</li>
+            </ul>
+        </div>
+    
+        <div class="dropdown flavor-dropdown">
+            <div class="select">
+                <span class="selected">Select Flavor</span>
+                <div class="caret"></div>
+            </div>
+            <ul class="menu">
+                <li>Hazelnut</li>
+                <li>Caramel</li>
+                <li>Chocolate</li>
+                <li>Cinnamon</li>
+                <li>Peppermint</li>
+                <li>Vanilla</li>
+                <li>Salted Caramel</li>
+                <li>Five Spice</li>
+                <li>Truffle</li>
+                <li>Paprika</li>
+                <li>Turmeric</li>
+                <li>Lion's Mane</li>
+            </ul>
+        </div>
+    
+        <div id="selected-coffee">Selected Coffee Type: </div>
+        <div id="selected-milk">Selected Milk Type: </div>
+        <div id="selected-flavor">Selected Flavor: </div>
+    </body>
+    </html>
+    
 </body>
+<script>
+// Select all dropdowns
+const dropdowns = document.querySelectorAll('.dropdown');
+
+// Iterate over each dropdown
+dropdowns.forEach(dropdown => {
+    // Select elements within each dropdown
+    const select = dropdown.querySelector('.select');
+    const caret = dropdown.querySelector('.caret');
+    const menu = dropdown.querySelector('.menu');
+    const options = dropdown.querySelectorAll('.menu li');
+    const selectedCoffee = document.getElementById('selected-coffee');
+    const selectedMilk = document.getElementById('selected-milk');
+    const selectedFlavor = document.getElementById('selected-flavor');
+    let storedOption; // Variable to store the selected option
+
+    // Event listener for the select element
+    select.addEventListener('click', () => {
+        // Toggle classes to open/close dropdown
+        select.classList.toggle('select-clicked');
+        caret.classList.toggle('caret-rotate');
+        menu.classList.toggle('menu-open');
+    });
+
+    // Event listener for each option within the menu
+    options.forEach(option => {
+        option.addEventListener('click', () => {
+            // Check which dropdown was clicked and update the corresponding selected option
+            if (dropdown.classList.contains('coffee-dropdown')) {
+                selectedCoffee.innerText = 'Selected Coffee Type: ' + option.innerText;
+            } else if (dropdown.classList.contains('milk-dropdown')) {
+                selectedMilk.innerText = 'Selected Milk Type: ' + option.innerText;
+            } else if (dropdown.classList.contains('flavor-dropdown')) {
+                selectedFlavor.innerText = 'Selected Flavor: ' + option.innerText;
+            }
+
+            // Store the selected option
+            storedOption = option.innerText;
+
+            // Reset dropdown state
+            select.classList.remove('select-clicked');
+            caret.classList.remove('caret-rotate');
+            menu.classList.remove('menu-open');
+
+            // Remove 'active' class from all options
+            options.forEach(option => {
+                option.classList.remove('active');
+            });
+
+            // Add 'active' class to the selected option
+            option.classList.add('active');
+        });
+    });
+});
+
+</script>
 </html>
