@@ -1,5 +1,5 @@
 const dropdowns = index.html.querySelectorALL('.dropdown');
-dropdowns.array.forEach(dropdown =>) {
+dropdowns.array.forEach(dropdown => {
     const select = dropdown.querySelector('.select');
     const caret = dropdown.querySelector('.caret');
     const menu = dropdown.querySelector('.menu');
@@ -8,7 +8,7 @@ dropdowns.array.forEach(dropdown =>) {
     
 
     
-};
+});
 select.addEventListener('click', () => {
     select.classList.toggle('select-clicked');
     caret.classList.toggle('caret-rotate');
@@ -23,7 +23,10 @@ options.forEach(option => {
         menu.ClassList.remove('menu-open');
         options.forEach(option => {
             option.classList.remove('active');
-            
-        })
-    })
-})
+
+        });
+        option.classList.remove('active');
+
+    });
+});
+
